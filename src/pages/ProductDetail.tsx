@@ -15,10 +15,6 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(product?.priceUnit === "kg" ? 0.5 : 1);
   const [customWeight, setCustomWeight] = useState("");
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   if (!product) {
     return (
       <>
