@@ -15,15 +15,15 @@ const Footer = () => (
         <div>
           <h4 className="text-sm uppercase tracking-widest mb-4 text-primary">Contact</h4>
           <div className="space-y-3 text-sm opacity-70">
-            <p className="flex items-center gap-2"><MapPin className="w-4 h-4 text-primary" /> 12 Rue de la Paix, 75002 Paris</p>
-            <p className="flex items-center gap-2"><Phone className="w-4 h-4 text-primary" /> 09 50 15 96 65</p>
+            <p className="flex items-center justify-center gap-2"><MapPin className="w-4 h-4 text-primary" /> 12 Rue de la Paix, 75002 Paris</p>
+            <p className="flex items-center justify-center gap-2"><Phone className="w-4 h-4 text-primary" /> 09 50 15 96 65</p>
           </div>
         </div>
         <div>
           <h4 className="text-sm uppercase tracking-widest mb-4 text-primary">Horaires</h4>
-          <div className="space-y-2 text-sm opacity-70">
-            <p className="flex items-center gap-2"><Clock className="w-4 h-4 text-primary" /> Lun – Sam : 8h – 20h</p>
-            <p className="ml-6">Dimanche : 8h – 13h</p>
+          <div className="space-y-2 text-sm opacity-70 text-center">
+            <p className="flex items-center justify-center gap-2"><Clock className="w-4 h-4 text-primary" /> Lun – Sam : 8h – 20h</p>
+            <p>Dimanche : 8h – 13h</p>
           </div>
         </div>
       </div>
