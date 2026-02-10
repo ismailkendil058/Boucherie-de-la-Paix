@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useStore } from "@/contexts/StoreContext";
@@ -7,12 +7,30 @@ import { motion } from "framer-motion";
 const CategoryCarousel = () => {
   const { categories } = useStore();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const scroll = (dir: "left" | "right") => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({ left: dir === "left" ? -300 : 300, behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const maxScrollLeft = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+        const nextScrollLeft = scrollRef.current.scrollLeft + 300;
+
+        if (nextScrollLeft >= maxScrollLeft) {
+          scrollRef.current.scrollTo({ left: 0, behavior: "auto" });
+        } else {
+          scrollRef.current.scrollBy({ left: 300, behavior: "auto" });
+        }
+      }
+    }, 3000); // Auto-rotate every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="py-16 md:py-24">
@@ -23,7 +41,7 @@ const CategoryCarousel = () => {
         </div>
 
         <div className="relative">
-          <button onClick={() => scroll("left")} className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 bg-background shadow-lg rounded-full p-2 hover:bg-secondary transition-colors hidden md:block">
+          <button onClick={() => scroll("left")} className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 bg-background shadow-lg rounded-full p-2 hover:bg-secondary transition-colors hidden md:block" aria-label="Scroll left">
             <ChevronLeft className="w-5 h-5" />
           </button>
 
@@ -56,7 +74,7 @@ const CategoryCarousel = () => {
             ))}
           </div>
 
-          <button onClick={() => scroll("right")} className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 bg-background shadow-lg rounded-full p-2 hover:bg-secondary transition-colors hidden md:block">
+          <button onClick={() => scroll("right")} className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 bg-background shadow-lg rounded-full p-2 hover:bg-secondary transition-colors hidden md:block" aria-label="Scroll right">
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
